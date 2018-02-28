@@ -1,0 +1,94 @@
+
+
+	printf("是否下注?(按1是，按2否):");
+	int answer;
+	scanf("%d", &answer);
+	if (answer == 1){
+		printf("請輸入您要下多少注:");
+		int bet2;
+		scanf("%d", &bet2);
+		players[1].bet = players[1].bet - bet2;
+		puts("-------------------------------------------------------");
+		puts("三張公牌為:");
+		puts("");
+		for (size_t i = 9; i <= 11; ++i){//發三張公牌
+			printf("%s%s\n", wDeck[i].suit, wDeck[i].face);
+		}//end for
+		puts("-------------------------------------------------------");
+		printf("您目前的賭金為:%d\n", players[1].bet );
+		printf("是否下注(第二輪)?(按1是，按2否):");
+		int answer2;
+		scanf("%d", &answer2);
+		
+		if (answer2 == 1){
+			printf("請輸入您要下多少注:");
+
+			int bet3;
+			scanf("%d", &bet3);
+			players[1].bet = players[1].bet - bet3;
+
+			//發第四張公牌
+			puts("-------------------------------------------------------");
+			puts("四張公牌為");
+			puts("");
+			for (size_t i = 9; i <= 12; ++i){//發四張公牌
+				printf("%s%s\n", wDeck[i].suit, wDeck[i].face);
+			}//end for
+			puts("-------------------------------------------------------");
+			printf("您目前的賭金為:%d\n", players[1].bet);
+			printf("是否下注(第三輪)?(按1是，按2否):");
+			int answer3;
+			scanf("%d", &answer3);
+
+			if (answer3 == 1){
+				printf("請輸入您要下多少注:");
+				int bet4;
+				scanf("%d", &bet4);
+				players[1].bet = players[1].bet - bet4;
+				//發第五張公牌
+				puts("-------------------------------------------------------");
+				puts("五張公牌為:");
+				puts("");
+				for (size_t i = 9; i <= 13; ++i){//發五張公牌
+					printf("%s%s\n", wDeck[i].suit, wDeck[i].face);
+
+					for (size_t j = 1; j <= 4; ++j){//count
+						++players[j].player[wDeck[i].faceNumber];
+						++players[j].playerS[wDeck[i].suitNumber];
+					}//end for
+				}//end for
+
+				puts("-------------------------------------------------------");
+				printf("您目前的賭金為:%d\n", players[1].bet);
+				printf("是否下注(第四輪)?(按1是，按2否):");
+
+				int answer4;
+				scanf("%d", &answer4);
+
+				if (answer4 == 1){
+					printf("請輸入您要下多少注:");
+					int bet5;
+					scanf("%d", &bet5);
+					players[1].bet = players[1].bet - bet5;
+					puts("");
+					determinePocker(wDeck, players);
+				}//end if
+
+				else{
+					printf("你失去%d元賭金",bet4 + bet2 + bet3 + 10);
+				}
+
+			}//end if
+
+			else{
+				printf("你失去%d元賭金", bet2 + bet3 + 10);
+			}
+		}//end if
+
+		else{
+			printf("你失去%d元賭金",bet2 + 10);
+		}
+	}//end if
+	else{
+		puts("你失去10元賭金");
+	}
